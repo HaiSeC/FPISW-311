@@ -5,13 +5,21 @@
 package PRESENTACION;
 
 import DATOS.Consultas;
+import NEGOCIACIONES.PieChart;
+import NEGOCIACIONES.PieChartBar;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneDarkIJTheme;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
 
 /**
  *
  * @author Cris
  */
 public class Menu extends javax.swing.JFrame {
-
+PieChartBar PC = new PieChartBar();
     /**
      * Creates new form NewJFrame
      */
@@ -28,7 +36,34 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        MnBar = new javax.swing.JMenuBar();
+        Mn = new javax.swing.JMenu();
+        MnPub = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        Mn.setText("Inicio");
+
+        MnPub.setText("Grafico Publisher");
+        MnPub.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnPubActionPerformed(evt);
+            }
+        });
+        Mn.add(MnPub);
+
+        jMenuItem1.setText("BarChart");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        Mn.add(jMenuItem1);
+
+        MnBar.add(Mn);
+
+        setJMenuBar(MnBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -38,16 +73,41 @@ public class Menu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 277, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void MnPubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPubActionPerformed
+        try {        
+        PieChart CC = new PieChart("Gráfico","Porcentaje de Publishers");
+        CC.pack();        
+        CC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        CC.setVisible(true);  
+        CC.setTitle("Porcentaje de Publishers");
+        CC.setLocationRelativeTo(null);
+    } catch (FileNotFoundException ex) {
+        Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+    }  
+    }//GEN-LAST:event_MnPubActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        PC.BarChartz();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
+        try{
+            UIManager.setLookAndFeel(new FlatAtomOneDarkIJTheme());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -55,7 +115,7 @@ public class Menu extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("FlatAtomOneDarkIJTheme".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -81,5 +141,9 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu Mn;
+    private javax.swing.JMenuBar MnBar;
+    private javax.swing.JMenuItem MnPub;
+    private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
 }

@@ -109,5 +109,68 @@ public class Consultas {
         return columnsS;
     }
     
+     public ArrayList<String> loadPublisher(){   
+        ArrayList<String> casaPubli = new ArrayList<>();
+        try{
+            connection = conexion.Conexion();
+            s = connection.createStatement();
+            rs = s.executeQuery("select sh.publisher as casa_publi from superheroes sh");           
+            while(rs.next()){
+                casaPubli.add(rs.getString("casa_publi"));
+                
+            }
+        }catch (Exception e){
+            System.out.println("Error en el Query SQL: " + e);
+        }
+        return casaPubli;        
+    }
+     
+     public ArrayList<String> loadGender(){   
+        ArrayList<String> lGender = new ArrayList<>();
+        try{
+            connection = conexion.Conexion();
+            s = connection.createStatement();
+            rs = s.executeQuery("select sh.gender as genero from superheroes sh");           
+            while(rs.next()){
+                lGender.add(rs.getString("genero"));
+                
+            }
+        }catch (Exception e){
+            System.out.println("Error en el Query SQL: " + e);
+        }
+        return lGender;        
+    }
+     
+     public ArrayList<String> loadheigen(){   
+        ArrayList<String> heigen = new ArrayList<>();
+        try{
+            connection = conexion.Conexion();
+            s = connection.createStatement();
+            rs = s.executeQuery("select sh.height as altura, sh.gender as genero from superheroes sh");           
+            while(rs.next()){
+                heigen.add(rs.getString("altura" + "genero"));
+                
+            }
+        }catch (Exception e){
+            System.out.println("Error en el Query SQL: " + e);
+        }
+        return heigen;        
+    }
+    
+     public ArrayList<String> loadposfem(){   
+        ArrayList<String> posfem = new ArrayList<>();
+        try{
+            connection = conexion.Conexion();
+            s = connection.createStatement();
+            rs = s.executeQuery("select sh.alignment as posicion from superheroes sh where sh.gender = 'Female'");           
+            while(rs.next()){
+                posfem.add(rs.getString("posicion"));
+                
+            }
+        }catch (Exception e){
+            System.out.println("Error en el Query SQL: " + e);
+        }
+        return posfem;        
+    }
     
 }
