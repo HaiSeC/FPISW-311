@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-
+import OBJETOs.ObjUser;
 /**
  *
  * @author Cris
@@ -185,4 +185,19 @@ public class Consultas {
         return posfem;        
     }
     
+    public ArrayList<ObjUser> loadUser(){     
+        try{
+            connection = conexion.Conexion();
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT us.username, us.password from users us");           
+            while(rs.next()){
+                ObjUser.ALUsers.add(new ObjUser(rs.getString("username"),rs.getString("password")));
+                
+            }
+        }catch (Exception e){
+            System.out.println("Error en el Query SQL: " + e);
+        }
+        return ObjUser.ALUsers;
+    }
+     
 }
