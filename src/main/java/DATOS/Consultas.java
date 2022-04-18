@@ -23,6 +23,21 @@ public class Consultas {
     
     
     
+    public ArrayList<String> obtenerSKN() {
+        ArrayList<String> columns = new ArrayList<>();
+        try {
+            connection = conexion.Conexion();
+            s = connection.createStatement();
+             rs = s.executeQuery("select skincolor from superheroes where skincolor <>'-' group by skincolor");
+            
+            while(rs.next()) {
+                columns.add(rs.getString("skincolor"));
+            }
+        } catch (Exception e) {
+        }
+        return columns;
+    }
+    
     
     public ArrayList<String> obtenerLHNH() {
         ArrayList<String> columns = new ArrayList<>();
@@ -37,34 +52,21 @@ public class Consultas {
         }
         return columns;
     }
-    public int obtenerSHWNH(){
-        int cant = 0;
+    public ArrayList<String> obtenerSHWNH(){
+        ArrayList<String> columns = new ArrayList<>();
         try {
             connection = conexion.Conexion();
             s = connection.createStatement();
-            rs = s.executeQuery("select count(*) as cantidad From superheroes where haircolor not like 'No Hair'");
+            rs = s.executeQuery("select haircolor as cabello From superheroes");
             while (rs.next()){
-               cant = rs.getInt("cantidad");
+               columns.add(rs.getString("cabello"));
                
             }
         } catch (Exception e) {
         }
-        return cant;
+        return columns;
     }
-    public int obtenerSHWH(){
-        int cant = 0;
-        try {
-            connection = conexion.Conexion();
-            s = connection.createStatement();
-            rs = s.executeQuery("select count(*) as cantidad From superheroes where haircolor like 'No Hair'");
-            while (rs.next()){
-               cant = rs.getInt("cantidad");
-               
-            }
-        } catch (Exception e) {
-        }
-        return cant;
-    }
+
     
     
     public ArrayList<String[]> obtenerHSH() {
@@ -73,15 +75,14 @@ public class Consultas {
         try {
             connection = conexion.Conexion();
             s = connection.createStatement();
-            rs = s.executeQuery("select sh.name as name, sh.gender as gender, sh.eyecolor as eyecolor, sh.race as race, sh.haircolor as haircolor, sh.height as height, sh.publisher as publisher From superheroes sh" +
-                                    "where sh.race != '-' and sh.haircolor != 'No Hair' and sh.haircolor != '-'" +
-                                    "order by sh.height DESC" +
-                                    "limit 10");
+            rs = s.executeQuery("select sh.name as name, sh.gender as gender, sh.eyecolor as eyecolor, sh.race as race, sh.haircolor as haircolor, sh.height as height, sh.publisher as publisher from superheroes sh where sh.race != '-' and sh.haircolor != 'No Hair' and sh.haircolor != '-' order by sh.height DESC limit 10");
             while (rs.next()) {
-                String [] row = {rs.getString("name"), rs.getString("gender"), rs.getString("eyercolor"), rs.getString("race"), rs.getString("haircolor"), rs.getString("height"), rs.getString("publisher")};
+                String [] row = {rs.getString("name"), rs.getString("gender"), rs.getString("eyecolor"), rs.getString("race"), rs.getString("haircolor"), rs.getString("height"), rs.getString("publisher")};
                 columnsS.add(row);
             }
         } catch (Exception e) {
+            System.out.println(e);
+            System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, "Error de conexión", "Mensaje", JOptionPane.ERROR_MESSAGE);
         }
         return columnsS;
@@ -94,13 +95,9 @@ public class Consultas {
         try {
             connection = conexion.Conexion();
             s = connection.createStatement();
-            rs = s.executeQuery("select hero_names as nombre, (select count(*) from jsonb_each_text(to_jsonb(s) - 'hero_names') as x(k,v) where x.v = 'True') as cantidad_poderes from superpowers s" +
-                                "INNER JOIN superheroes sh ON sh.name = s.hero_names" +
-                                "WHERE sh.publisher = '"+ casa_publicacion +"'" +
-                                "Order by cantidad_poderes DESC" +
-                                "limit 10");
+            rs = s.executeQuery("select hero_names as nombre, (select count(*) from jsonb_each_text(to_jsonb(s) - 'hero_names') as x(k,v) where x.v = 'True') as cantidad_poderes from superpowers s INNER JOIN superheroes sh ON sh.name = s.hero_names WHERE sh.publisher = '"+ casa_publicacion +"' Order by cantidad_poderes DESC limit 10");
             while (rs.next()) {
-                String [] row = {rs.getString("nombre"), rs.getString("cantidad_poderes")};
+                String[] row = {rs.getString("nombre"), rs.getString("cantidad_poderes")};
                 columnsS.add(row);
             }
         } catch (Exception e) {
@@ -109,6 +106,21 @@ public class Consultas {
         return columnsS;
     }
     
+     public ArrayList<String> loadPublisher2(){   
+        ArrayList<String> casaPubli = new ArrayList<>();
+        try{
+            connection = conexion.Conexion();
+            s = connection.createStatement();
+            rs = s.executeQuery("select sh.publisher as casa_publi from superheroes sh group by sh.publisher");           
+            while(rs.next()){
+                casaPubli.add(rs.getString("casa_publi"));
+                
+            }
+        }catch (Exception e){
+            System.out.println("Error en el Query SQL: " + e);
+        }
+        return casaPubli;        
+    }
      public ArrayList<String> loadPublisher(){   
         ArrayList<String> casaPubli = new ArrayList<>();
         try{

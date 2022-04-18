@@ -2,13 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package NEGOCIACIONES;
+package OBJETOs;
 
+import NEGOCIACIONES.Publisher;
 import OBJETOs.ObjPublisher;
+import java.awt.BorderLayout;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.ChartPanel;
@@ -21,38 +24,25 @@ import org.jfree.data.general.PieDataset;
  *
  * @author Guerrero
  */
-public class PieChart extends JFrame{
+public class PieChart {
     private Publisher data = new Publisher();
-    public PieChart(String appTitle, String chartTitle) throws FileNotFoundException{
-        PieDataset dataset = createDataset();
-        JFreeChart chart = createChart(dataset, chartTitle);
+    
+    public PieChart(String appTitle, String chartTitle, PieDataset dataSet, JFrame frame) throws FileNotFoundException{
+        JFreeChart chart = createChart(dataSet, chartTitle);
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 300));
-        setContentPane(chartPanel);           
+        frame.setContentPane(chartPanel);
     }
-
-
     
-    private PieDataset createDataset() throws FileNotFoundException{
-        ObjPublisher.casaPubli = new ArrayList<>();
-        ArrayList<String> casaPubliX = data.loadPublishers(); 
-
-        int tam = casaPubliX.size(); 
-        System.out.println(casaPubliX);           
-        System.out.println(casaPubliX.size());
-
-        DefaultPieDataset result = new DefaultPieDataset();
-        for (int j = 0; j < casaPubliX.size(); j++){
-                String datos = String.valueOf(casaPubliX.get(j)) ;
-                int c = Collections.frequency(casaPubliX, datos);
-                if (datos.equals("null")){
-                    datos = "Desconocido";
-                }
-                result.setValue(datos,c);
-            }
-        
-        return result;
+    public PieChart(String appTitle, String chartTitle, PieDataset dataSet, JPanel panel) throws FileNotFoundException{
+        JFreeChart chart = createChart(dataSet, chartTitle);
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(panel.getSize());
+        panel.setLayout(new java.awt.BorderLayout());
+        panel.add(chartPanel, BorderLayout.CENTER);
+        panel.validate();
     }
+
             
     private JFreeChart createChart (PieDataset dataset, String title){
         JFreeChart chart = ChartFactory.createPieChart3D(title, dataset, true, true, false);

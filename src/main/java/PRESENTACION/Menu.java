@@ -5,10 +5,13 @@
 package PRESENTACION;
 
 import DATOS.Consultas;
-import NEGOCIACIONES.PieChart;
+import OBJETOs.PieChart;
 import NEGOCIACIONES.PieChartBar;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneDarkIJTheme;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -20,6 +23,7 @@ import javax.swing.UIManager;
  */
 public class Menu extends javax.swing.JFrame {
 PieChartBar PC = new PieChartBar();
+Consultas CT = new Consultas();
     /**
      * Creates new form NewJFrame
      */
@@ -38,22 +42,18 @@ PieChartBar PC = new PieChartBar();
 
         MnBar = new javax.swing.JMenuBar();
         Mn = new javax.swing.JMenu();
-        MnPub = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        MnPub = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Mn.setText("Inicio");
 
-        MnPub.setText("Grafico Publisher");
-        MnPub.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnPubActionPerformed(evt);
-            }
-        });
-        Mn.add(MnPub);
-
-        jMenuItem1.setText("BarChart");
+        jMenuItem1.setText("Heroes Calvos");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -61,7 +61,43 @@ PieChartBar PC = new PieChartBar();
         });
         Mn.add(jMenuItem1);
 
+        jMenuItem3.setText("Top 10 Altura");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        Mn.add(jMenuItem3);
+
+        jMenuItem4.setText("Top 10 Poderes");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        Mn.add(jMenuItem4);
+
         MnBar.add(Mn);
+
+        jMenu1.setText("Estadisticas");
+
+        MnPub.setText("Editoriales");
+        MnPub.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnPubActionPerformed(evt);
+            }
+        });
+        jMenu1.add(MnPub);
+
+        jMenuItem2.setText("Color de Piel");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
+        MnBar.add(jMenu1);
 
         setJMenuBar(MnBar);
 
@@ -69,34 +105,57 @@ PieChartBar PC = new PieChartBar();
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 1157, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGap(0, 604, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        Graficos GF = new Graficos("Porcentaje de Heroes por Color",  CT.obtenerSKN());
+        GF.setVisible(true);
+        GF.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     private void MnPubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPubActionPerformed
-        try {        
-        PieChart CC = new PieChart("Gráfico","Porcentaje de Publishers");
-        CC.pack();        
-        CC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        CC.setVisible(true);  
-        CC.setTitle("Porcentaje de Publishers");
-        CC.setLocationRelativeTo(null);
-    } catch (FileNotFoundException ex) {
-        Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-    }  
+
+        Graficos GF = new Graficos("Porcentaje de Publishers",   CT.loadPublisher());
+        GF.setVisible(true);
+        GF.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_MnPubActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        PC.BarChartz();
+        GraficosListas GFL = new GraficosListas("Super Heroes Calvos", CT.obtenerLHNH(), CT.obtenerSHWNH());
+        GFL.setVisible(true);
+        GFL.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        String[] Columnas = {"Nombre", "Genero", "Color de Ojos", "Raza", "Color de Cabello", "Altura", "Editorial"};
+        
+        Tabla TB = new Tabla(CT.obtenerHSH(), Columnas);
+        TB.setVisible(true);
+        TB.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+       GraficosRBTNListas GRBL = new GraficosRBTNListas(CT.loadPublisher2(), "Top 10 Super Heroes con mas Super Poderes");
+       GRBL.setLocationRelativeTo(null);
+       GRBL.setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+
+    
     /**
      * @param args the command line arguments
      */
@@ -144,6 +203,10 @@ PieChartBar PC = new PieChartBar();
     private javax.swing.JMenu Mn;
     private javax.swing.JMenuBar MnBar;
     private javax.swing.JMenuItem MnPub;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     // End of variables declaration//GEN-END:variables
 }
