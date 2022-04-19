@@ -153,15 +153,29 @@ public class Consultas {
         return lGender;        
     }
      
-     public ArrayList<String> loadheigen(){   
-        ArrayList<String> heigen = new ArrayList<>();
+     public ArrayList<String[]> loadheigen(String Gen){   
+        ArrayList<String[]> heigen = new ArrayList<>();
         try{
+            System.out.println(Gen);
             connection = conexion.Conexion();
-            s = connection.createStatement();
-            rs = s.executeQuery("select sh.height as altura, sh.gender as genero from superheroes sh");           
+            s = connection.createStatement();             
+            rs = s.executeQuery("select sh.height as altura, sh.gender as genero from superheroes sh where sh.gender = '" + Gen + "'");           
             while(rs.next()){
-                heigen.add(rs.getString("altura" + "genero"));
-                
+//                String gen = rs.getString("genero");
+//                String alt = rs.getString("altura");
+//                if (gen.equals("Male")){
+//                    gen = " Hombre";
+//                } else if(gen.equals("Female")){
+//                    gen = " Mujer";
+//                } else if(gen.equals("-")){
+//                    gen = " Género Desconocido";
+//                }  
+//                if(alt.equals("-99.0")){
+//                    alt = " Altura Desconocida";
+//                } 
+                String[] row = {rs.getString("altura"), rs.getString("genero")};
+                heigen.add(row);
+                //heigen.add(alt + gen);
             }
         }catch (Exception e){
             System.out.println("Error en el Query SQL: " + e);

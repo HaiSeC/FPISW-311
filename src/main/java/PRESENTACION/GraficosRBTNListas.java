@@ -11,6 +11,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -39,12 +40,23 @@ Consultas CT = new Consultas();
     }
     
     private void CrearRBTN(ArrayList<String> EDT) {
-        jPanel2.setLayout(new GridLayout(EDT.size()/2, EDT.size()/2));
+         if (Titulo.equals("Altura Genero")){
+            List.setEnabled(false);
+            LblTitle.setVisible(false);
+        
+        }
+        PlnRB.setLayout(new GridLayout(EDT.size()/2, EDT.size()/2));
         
         for (int i = 0; i < EDT.size(); i++) {
             String get = EDT.get(i);
             if (get == null ) {
                 get = "Desconocido";
+            } else if (get.equals("-")){
+                get = "Género Desconocido";
+            } else if (get.equals("Female")){
+                get = "Mujer";
+            } else if (get.equals("Male")){
+                get = "Hombre";
             }
             JRadioButton boton = new JRadioButton();
             boton.setText(get);
@@ -53,7 +65,7 @@ Consultas CT = new Consultas();
         }
         for (int i = 0; i < botones.size(); i++) {
             JRadioButton get = botones.get(i);
-            jPanel2.add(get);
+            PlnRB.add(get);
             //jPanel2.validate();
         }
     }
@@ -69,51 +81,51 @@ Consultas CT = new Consultas();
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        List = new javax.swing.JList<>();
+        LblTitle = new javax.swing.JLabel();
+        PlnPie = new javax.swing.JPanel();
+        PlnRB = new javax.swing.JPanel();
+        LblHeader = new javax.swing.JLabel();
+        BtnVis = new javax.swing.JButton();
+        MnBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(List);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout PlnPieLayout = new javax.swing.GroupLayout(PlnPie);
+        PlnPie.setLayout(PlnPieLayout);
+        PlnPieLayout.setHorizontalGroup(
+            PlnPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 591, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        PlnPieLayout.setVerticalGroup(
+            PlnPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout PlnRBLayout = new javax.swing.GroupLayout(PlnRB);
+        PlnRB.setLayout(PlnRBLayout);
+        PlnRBLayout.setHorizontalGroup(
+            PlnRBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        PlnRBLayout.setVerticalGroup(
+            PlnRBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Editoriales");
+        LblHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LblHeader.setText("Editoriales");
 
-        jButton1.setText("Vizualizar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnVis.setText("Visualizar");
+        BtnVis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BtnVisActionPerformed(evt);
             }
         });
 
@@ -127,9 +139,9 @@ Consultas CT = new Consultas();
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuBar1.add(jMenu1);
+        MnBar.add(jMenu1);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(MnBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -138,16 +150,16 @@ Consultas CT = new Consultas();
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE))
+                    .addComponent(PlnRB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(LblHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE))
                 .addGap(31, 31, 31)
-                .addComponent(jButton1)
+                .addComponent(BtnVis)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(LblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PlnPie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -155,19 +167,19 @@ Consultas CT = new Consultas();
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PlnPie, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(LblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(PlnRB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(198, 198, 198)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnVis, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(223, Short.MAX_VALUE))
         );
 
@@ -176,41 +188,55 @@ Consultas CT = new Consultas();
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         Menu main = new Menu();
-        main.setVisible(true);        // TODO add your handling code here:
+        main.setVisible(true);        
         main.setLocationRelativeTo(null);
-        this.dispose();        // TODO add your handling code here:
+        this.dispose();      
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jPanel1.removeAll();
-        jPanel1.validate();
-        String publi = getPublisher();
-        CrearGraficos(Titulo, CT.obtenerEstPoderes(publi));
-        LlenarLista(CT.obtenerEstPoderes(publi), Titulo);
+    private void BtnVisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVisActionPerformed
+        PlnPie.removeAll();
+        PlnPie.validate();
+        String publi = getPublisher();    
+        if (Titulo.equals("Altura Genero")){
+            if (publi.equals("Hombre")){
+                publi = "Male";
+            } else if (publi.equals("Mujer")){
+                publi = "Female";
+            } else if (publi.equals("Género Desconocido")){
+                publi = "-";
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+        }
+        
+        CrearGraficoX(Titulo, CT.loadheigen(publi));        
+        }else 
+        CrearGraficos(Titulo, CT.obtenerEstPoderes(publi));
+        LlenarLista(CT.obtenerEstPoderes(publi), Titulo); 
 
+    }//GEN-LAST:event_BtnVisActionPerformed
+    
     
     private void LlenarLista(ArrayList<String[]> array, String titulo) {
         
-        jLabel1.setText("Lista de " + titulo);
+        LblTitle.setText("Lista de " + titulo);
          DefaultListModel<String> model = new DefaultListModel<>();
          for (int i = 0; i < array.size(); i++) {
             String get = array.get(i)[0];
              model.addElement(get);
         }
-         jList1.setModel(model);
+         List.setModel(model);
          
     }
-    
+  
      private void CrearGraficos(String Titulo, ArrayList<String[]> data) { 
         try {           
-            PieChart CC = new PieChart("Gráfico", Titulo, pie.createDataset3(data), jPanel1);
-            /*CC.pack();      
-            CC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            CC.setVisible(true);  
-            CC.setTitle(Titulo);
-            CC.setLocationRelativeTo(null);*/
+            PieChart CC = new PieChart("Gráfico", Titulo, pie.createDataset3(data), PlnPie);
+        } catch (FileNotFoundException ex) {
+        Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }
+     private void CrearGraficoX(String Titulo, ArrayList<String[]> data) { 
+        try {           
+            PieChart CC = new PieChart("Gráfico", Titulo, pie.createDatasetX(data), PlnPie);
         } catch (FileNotFoundException ex) {
         Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -260,16 +286,16 @@ Consultas CT = new Consultas();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnVis;
+    private javax.swing.JLabel LblHeader;
+    private javax.swing.JLabel LblTitle;
+    private javax.swing.JList<String> List;
+    private javax.swing.JMenuBar MnBar;
+    private javax.swing.JPanel PlnPie;
+    private javax.swing.JPanel PlnRB;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

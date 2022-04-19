@@ -42,44 +42,47 @@ Consultas CT = new Consultas();
 
         MnBar = new javax.swing.JMenuBar();
         Mn = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        MnHC = new javax.swing.JMenuItem();
+        Mn10Height = new javax.swing.JMenuItem();
+        Mn10P = new javax.swing.JMenuItem();
+        MnBar2 = new javax.swing.JMenu();
         MnPub = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        MnSkinColor = new javax.swing.JMenuItem();
+        MnDG = new javax.swing.JMenuItem();
+        MnAF = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Mn.setText("Inicio");
 
-        jMenuItem1.setText("Heroes Calvos");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        MnHC.setText("Heroes Calvos");
+        MnHC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                MnHCActionPerformed(evt);
             }
         });
-        Mn.add(jMenuItem1);
+        Mn.add(MnHC);
 
-        jMenuItem3.setText("Top 10 Altura");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        Mn10Height.setText("Top 10 Altura");
+        Mn10Height.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                Mn10HeightActionPerformed(evt);
             }
         });
-        Mn.add(jMenuItem3);
+        Mn.add(Mn10Height);
 
-        jMenuItem4.setText("Top 10 Poderes");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        Mn10P.setText("Top 10 Poderes");
+        Mn10P.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                Mn10PActionPerformed(evt);
             }
         });
-        Mn.add(jMenuItem4);
+        Mn.add(Mn10P);
 
         MnBar.add(Mn);
 
-        jMenu1.setText("Estadisticas");
+        MnBar2.setText("Estadisticas");
 
         MnPub.setText("Editoriales");
         MnPub.addActionListener(new java.awt.event.ActionListener() {
@@ -87,17 +90,41 @@ Consultas CT = new Consultas();
                 MnPubActionPerformed(evt);
             }
         });
-        jMenu1.add(MnPub);
+        MnBar2.add(MnPub);
 
-        jMenuItem2.setText("Color de Piel");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        MnSkinColor.setText("Color de Piel");
+        MnSkinColor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                MnSkinColorActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        MnBar2.add(MnSkinColor);
 
-        MnBar.add(jMenu1);
+        MnDG.setText("Distribucion por Genero");
+        MnDG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnDGActionPerformed(evt);
+            }
+        });
+        MnBar2.add(MnDG);
+
+        MnAF.setText("Alineacion Femenina");
+        MnAF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnAFActionPerformed(evt);
+            }
+        });
+        MnBar2.add(MnAF);
+
+        jMenuItem1.setText("Genero por Altura");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        MnBar2.add(jMenuItem1);
+
+        MnBar.add(MnBar2);
 
         setJMenuBar(MnBar);
 
@@ -116,12 +143,12 @@ Consultas CT = new Consultas();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void MnSkinColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSkinColorActionPerformed
         Graficos GF = new Graficos("Porcentaje de Heroes por Color",  CT.obtenerSKN());
         GF.setVisible(true);
         GF.setLocationRelativeTo(null);
         this.dispose();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_MnSkinColorActionPerformed
 
     private void MnPubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPubActionPerformed
 
@@ -131,28 +158,54 @@ Consultas CT = new Consultas();
         this.dispose();
     }//GEN-LAST:event_MnPubActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void MnHCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnHCActionPerformed
         GraficosListas GFL = new GraficosListas("Super Heroes Calvos", CT.obtenerLHNH(), CT.obtenerSHWNH());
         GFL.setVisible(true);
         GFL.setLocationRelativeTo(null);
         this.dispose();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_MnHCActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        String[] Columnas = {"Nombre", "Genero", "Color de Ojos", "Raza", "Color de Cabello", "Altura", "Editorial"};
-        
+    private void Mn10HeightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mn10HeightActionPerformed
+        String[] Columnas = {"Nombre", "Genero", "Color de Ojos", "Raza", "Color de Cabello", "Altura", "Editorial"};    
         Tabla TB = new Tabla(CT.obtenerHSH(), Columnas);
         TB.setVisible(true);
         TB.setLocationRelativeTo(null);
         this.dispose();
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_Mn10HeightActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void Mn10PActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mn10PActionPerformed
        GraficosRBTNListas GRBL = new GraficosRBTNListas(CT.loadPublisher2(), "Top 10 Super Heroes con mas Super Poderes");
        GRBL.setLocationRelativeTo(null);
        GRBL.setVisible(true);
        this.dispose();
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_Mn10PActionPerformed
+
+    private void MnDGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDGActionPerformed
+        Graficos DG = new Graficos("Porcentaje de Generos",   CT.loadGender());
+        DG.setVisible(true);
+        DG.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_MnDGActionPerformed
+
+    private void MnAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnAFActionPerformed
+        Graficos AF = new Graficos("Porcentaje de Alineación Femenina",   CT.loadposfem());
+        AF.setVisible(true);
+        AF.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_MnAFActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+//        String[] Columnas = {"Altura", "Genero"};
+        ArrayList<String> AL = new ArrayList<>();
+        AL.add("Male");
+        AL.add("Female");
+        AL.add("-");
+        GraficosRBTNListas HG = new GraficosRBTNListas(AL, "Altura Genero");  
+        //Graficos HG = new Graficos("Porcentaje de Altura por Género", CT.loadheigen());
+        HG.setVisible(true);
+        HG.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
 
     
@@ -201,12 +254,15 @@ Consultas CT = new Consultas();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Mn;
+    private javax.swing.JMenuItem Mn10Height;
+    private javax.swing.JMenuItem Mn10P;
+    private javax.swing.JMenuItem MnAF;
     private javax.swing.JMenuBar MnBar;
+    private javax.swing.JMenu MnBar2;
+    private javax.swing.JMenuItem MnDG;
+    private javax.swing.JMenuItem MnHC;
     private javax.swing.JMenuItem MnPub;
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem MnSkinColor;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     // End of variables declaration//GEN-END:variables
 }

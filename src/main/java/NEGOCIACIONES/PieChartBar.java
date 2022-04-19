@@ -41,7 +41,7 @@ private Publisher data = new Publisher();
                 dataset.setValue(c,datos,datos);
             }
        
-       JFreeChart chart =ChartFactory.createBarChart("Cantidad de Super Heroes", "Publisher", "Cantidad", dataset,PlotOrientation.HORIZONTAL,false,true,false);
+       JFreeChart chart = ChartFactory.createBarChart("Cantidad de Super Heroes", "Publisher", "Cantidad", dataset,PlotOrientation.HORIZONTAL,false,true,false);
        CategoryPlot p=chart.getCategoryPlot();
        p.setRangeGridlinePaint(Color.black);
        ChartFrame frame = new ChartFrame("Gráfico de Publishers", chart);

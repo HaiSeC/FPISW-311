@@ -26,6 +26,11 @@ public class Graficos extends javax.swing.JFrame {
     public Graficos(String Titulo, ArrayList<String> data) {
         initComponents();
         CrearGraficos(Titulo, data);
+        if (Titulo.equals("Porcentaje de Altura por Género")){
+          CrearGraficoz(Titulo, data);  
+        }
+            
+        
     }
     
         private void CrearGraficos(String Titulo, ArrayList<String> data) { 
@@ -36,6 +41,13 @@ public class Graficos extends javax.swing.JFrame {
             CC.setVisible(true);  
             CC.setTitle(Titulo);
             CC.setLocationRelativeTo(null);*/
+        } catch (FileNotFoundException ex) {
+        Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }
+        private void CrearGraficoz(String Titulo, ArrayList<String> data) { 
+        try {           
+            PieChart CC = new PieChart("Gráfico", Titulo, pie.createDatasetAG(data), this);
         } catch (FileNotFoundException ex) {
         Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -86,9 +98,9 @@ public class Graficos extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         Menu main = new Menu();
-        main.setVisible(true);        // TODO add your handling code here:
+        main.setVisible(true);      
         main.setLocationRelativeTo(null);
-        this.dispose();        // TODO add your handling code here:
+        this.dispose();       
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
