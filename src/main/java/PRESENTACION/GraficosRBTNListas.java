@@ -22,6 +22,7 @@ import javax.swing.JRadioButton;
  * @author Cris
  */
 public class GraficosRBTNListas extends javax.swing.JFrame {
+    int tamZ;
 ArrayList<JRadioButton> botones = new ArrayList<JRadioButton>();
 String Titulo = "";
 Consultas CT = new Consultas();
@@ -37,16 +38,18 @@ Consultas CT = new Consultas();
         initComponents();
         CrearRBTN(editoriales);
         this.Titulo = Titulo;
-    }
-    
-    private void CrearRBTN(ArrayList<String> EDT) {
-         if (Titulo.equals("Altura Genero")){
+        if (Titulo.equals("Altura Genero")){
             List.setEnabled(false);
             LblTitle.setVisible(false);
-        
+            jScrollPane1.setVisible(false);
+            List.setVisible(false);
+             System.out.println(Titulo);
         }
-        PlnRB.setLayout(new GridLayout(EDT.size()/2, EDT.size()/2));
-        
+    }
+    
+    private void CrearRBTN(ArrayList<String> EDT) {       
+        PlnRB.setLayout(new GridLayout(EDT.size()/2, EDT.size()/2));  
+        int z = 0;
         for (int i = 0; i < EDT.size(); i++) {
             String get = EDT.get(i);
             if (get == null ) {
@@ -59,9 +62,15 @@ Consultas CT = new Consultas();
                 get = "Hombre";
             }
             JRadioButton boton = new JRadioButton();
+            if (z == 0){
+            boton.setSelected(true);
             boton.setText(get);
             buttonGroup1.add(boton);
             botones.add(boton);
+        }
+            boton.setText(get);
+            buttonGroup1.add(boton);
+            botones.add(boton);       
         }
         for (int i = 0; i < botones.size(); i++) {
             JRadioButton get = botones.get(i);
@@ -87,15 +96,26 @@ Consultas CT = new Consultas();
         PlnRB = new javax.swing.JPanel();
         LblHeader = new javax.swing.JLabel();
         BtnVis = new javax.swing.JButton();
+        D50 = new javax.swing.JLabel();
+        D70 = new javax.swing.JLabel();
+        D71 = new javax.swing.JLabel();
         MnBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1550, 600));
+        setSize(new java.awt.Dimension(1550, 488));
+        getContentPane().setLayout(null);
 
         jScrollPane1.setViewportView(List);
 
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(655, 89, 258, 376);
+
         LblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(LblTitle);
+        LblTitle.setBounds(655, 6, 254, 57);
 
         javax.swing.GroupLayout PlnPieLayout = new javax.swing.GroupLayout(PlnPie);
         PlnPie.setLayout(PlnPieLayout);
@@ -108,6 +128,9 @@ Consultas CT = new Consultas();
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        getContentPane().add(PlnPie);
+        PlnPie.setBounds(931, 6, 591, 459);
+
         javax.swing.GroupLayout PlnRBLayout = new javax.swing.GroupLayout(PlnRB);
         PlnRB.setLayout(PlnRBLayout);
         PlnRBLayout.setHorizontalGroup(
@@ -119,8 +142,13 @@ Consultas CT = new Consultas();
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        getContentPane().add(PlnRB);
+        PlnRB.setBounds(6, 89, 508, 376);
+
         LblHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LblHeader.setText("Editoriales");
+        getContentPane().add(LblHeader);
+        LblHeader.setBounds(6, 6, 508, 65);
 
         BtnVis.setText("Visualizar");
         BtnVis.addActionListener(new java.awt.event.ActionListener() {
@@ -128,6 +156,14 @@ Consultas CT = new Consultas();
                 BtnVisActionPerformed(evt);
             }
         });
+        getContentPane().add(BtnVis);
+        BtnVis.setBounds(545, 198, 100, 50);
+        getContentPane().add(D50);
+        D50.setBounds(660, 100, 410, 16);
+        getContentPane().add(D70);
+        D70.setBounds(660, 180, 410, 16);
+        getContentPane().add(D71);
+        D71.setBounds(660, 140, 410, 16);
 
         jMenu1.setText("Menu");
 
@@ -142,46 +178,6 @@ Consultas CT = new Consultas();
         MnBar.add(jMenu1);
 
         setJMenuBar(MnBar);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(PlnRB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(LblHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE))
-                .addGap(31, 31, 31)
-                .addComponent(BtnVis)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addComponent(LblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(PlnPie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PlnPie, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addComponent(PlnRB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(198, 198, 198)
-                .addComponent(BtnVis, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(223, Short.MAX_VALUE))
-        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -206,7 +202,10 @@ Consultas CT = new Consultas();
                 publi = "-";
         
         }
-        
+        calTam(CT.loadheigen(publi));
+        AltD(CT.loadAltD(publi));
+        Alt170(CT.loadAlt170(publi));
+        AltR(CT.loadAltR(publi));
         CrearGraficoX(Titulo, CT.loadheigen(publi));        
         }else 
         CrearGraficos(Titulo, CT.obtenerEstPoderes(publi));
@@ -214,7 +213,29 @@ Consultas CT = new Consultas();
 
     }//GEN-LAST:event_BtnVisActionPerformed
     
-    
+    private void AltD(ArrayList<String> alt){
+        int tamX = alt.size();
+        System.out.println(tamX);
+        double per = ((tamX * 100)/tamZ); 
+        D50.setText("De Altura Desconocida " + per + "%");
+    }
+    private void Alt170(ArrayList<String> alt){
+        int tamX = alt.size();
+        System.out.println(tamX);
+        double per = ((tamX * 100)/tamZ); 
+        D71.setText("De 62.5 a 170 cm " + per + "%");
+    }
+    private void AltR(ArrayList<String> alt){
+        int tamX = alt.size();
+        System.out.println(tamX);
+        double per = ((tamX * 100)/tamZ); 
+        D70.setText("De 173 a 975 cm " + per + "%");
+    }
+    private void calTam(ArrayList<String[]> alt){
+        tamZ = alt.size();
+        System.out.println(tamZ);
+    }
+            
     private void LlenarLista(ArrayList<String[]> array, String titulo) {
         
         LblTitle.setText("Lista de " + titulo);
@@ -287,6 +308,9 @@ Consultas CT = new Consultas();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnVis;
+    private javax.swing.JLabel D50;
+    private javax.swing.JLabel D70;
+    private javax.swing.JLabel D71;
     private javax.swing.JLabel LblHeader;
     private javax.swing.JLabel LblTitle;
     private javax.swing.JList<String> List;

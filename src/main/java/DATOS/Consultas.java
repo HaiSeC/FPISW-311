@@ -126,7 +126,7 @@ public class Consultas {
         try{
             connection = conexion.Conexion();
             s = connection.createStatement();
-            rs = s.executeQuery("select sh.publisher as casa_publi from superheroes sh");           
+            rs = s.executeQuery("select sh.publisher as casa_publi from superheroes sh order by sh.publisher");           
             while(rs.next()){
                 casaPubli.add(rs.getString("casa_publi"));
                 
@@ -152,6 +152,50 @@ public class Consultas {
         }
         return lGender;        
     }
+     public ArrayList<String> loadAlt170(String Gen){   
+        ArrayList<String> Alt170 = new ArrayList<>();
+        try{
+            connection = conexion.Conexion();
+            s = connection.createStatement();
+            rs = s.executeQuery("select sh.height as altura, sh.gender as genero from superheroes sh where sh.gender = '" + Gen + "' and sh.height between '62.5' and '170.0' order by sh.height");           
+            while(rs.next()){
+                Alt170.add(rs.getString("altura"));               
+            }
+        }catch (Exception e){
+            System.out.println("Error en el Query SQL: " + e);
+        }
+        return Alt170;        
+    }
+     public ArrayList<String> loadAltD(String Gen){   
+        ArrayList<String> AltD = new ArrayList<>();
+        try{
+            connection = conexion.Conexion();
+            s = connection.createStatement();
+            rs = s.executeQuery("select sh.height as altura, sh.gender as genero from superheroes sh where sh.gender = '" + Gen + "' and sh.height = '-99.0'");           
+            while(rs.next()){
+                AltD.add(rs.getString("altura"));
+                
+            }
+        }catch (Exception e){
+            System.out.println("Error en el Query SQL: " + e);
+        }
+        return AltD;        
+    }
+     public ArrayList<String> loadAltR(String Gen){   
+        ArrayList<String> AltDR = new ArrayList<>();
+        try{
+            connection = conexion.Conexion();
+            s = connection.createStatement();
+            rs = s.executeQuery("select sh.height as altura, sh.gender as genero from superheroes sh where sh.gender = '" + Gen + "' and sh.height between '173.0' and '975.0' order by sh.height");           
+            while(rs.next()){
+                AltDR.add(rs.getString("altura"));
+                
+            }
+        }catch (Exception e){
+            System.out.println("Error en el Query SQL: " + e);
+        }
+        return AltDR;        
+    }
      
      public ArrayList<String[]> loadheigen(String Gen){   
         ArrayList<String[]> heigen = new ArrayList<>();
@@ -159,23 +203,10 @@ public class Consultas {
             System.out.println(Gen);
             connection = conexion.Conexion();
             s = connection.createStatement();             
-            rs = s.executeQuery("select sh.height as altura, sh.gender as genero from superheroes sh where sh.gender = '" + Gen + "'");           
+            rs = s.executeQuery("select sh.height as altura, sh.gender as genero from superheroes sh where sh.gender = '" + Gen + "' order by sh.height");           
             while(rs.next()){
-//                String gen = rs.getString("genero");
-//                String alt = rs.getString("altura");
-//                if (gen.equals("Male")){
-//                    gen = " Hombre";
-//                } else if(gen.equals("Female")){
-//                    gen = " Mujer";
-//                } else if(gen.equals("-")){
-//                    gen = " Género Desconocido";
-//                }  
-//                if(alt.equals("-99.0")){
-//                    alt = " Altura Desconocida";
-//                } 
                 String[] row = {rs.getString("altura"), rs.getString("genero")};
                 heigen.add(row);
-                //heigen.add(alt + gen);
             }
         }catch (Exception e){
             System.out.println("Error en el Query SQL: " + e);

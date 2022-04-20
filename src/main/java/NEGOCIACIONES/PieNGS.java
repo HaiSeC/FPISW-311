@@ -6,7 +6,6 @@ package NEGOCIACIONES;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
@@ -106,20 +105,20 @@ public class PieNGS {
     }
     
     public PieDataset createDatasetX(ArrayList<String[]> dataname) throws FileNotFoundException{
-        ArrayList<String> can = new ArrayList<>();
+        ArrayList<String> alt = new ArrayList<>();
         int tam =  dataname.size(); 
         DefaultPieDataset result = new DefaultPieDataset();
         for (int j = 0; j <  dataname.size(); j++){
-                String datos = String.valueOf(dataname.get(j)[0]);
-                can.add(datos);           
-                int c = Collections.frequency(can, datos);
-                System.out.println(c);
-                if (datos.equals("-99.0")){
-                    datos = "Altura Desconocida";              
+                String altDB = String.valueOf(dataname.get(j)[0]);
+                alt.add(altDB);    
+                int cant = Collections.frequency(alt, altDB);
+                //System.out.println(cant);
+                if (altDB.equals("-99.0")){
+                    altDB = "Altura Desconocida";              
                     }
-                result.setValue(datos + " cm",c);
+                result.setValue(altDB + " cm",cant);
                 }    
     
     return result;
-}
+    }
 }

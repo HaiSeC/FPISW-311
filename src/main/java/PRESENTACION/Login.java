@@ -6,7 +6,11 @@ package PRESENTACION;
 import NEGOCIACIONES.User;
 import OBJETOs.ObjUser;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneDarkIJTheme;
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 /**
@@ -17,6 +21,7 @@ public class Login extends javax.swing.JFrame {
     User US = new User();
     Menu Mn = new Menu();
     Object[] Userz = new Object[2];
+    String pzza;
     /**
      * Creates new form Login
      */
@@ -107,12 +112,20 @@ public class Login extends javax.swing.JFrame {
     
     private void BtnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogActionPerformed
         getUser();
+        String md5 = "";
         String pass = "";
         char [] pasz = TxtPass.getPassword();
         for(int x = 0; x < pasz.length; x++){
             pass += pasz[x];
         }
-        if (TxtUser.getText().equals(Userz[0]) && pass.equals(Userz[1])){
+        pzza = pass;
+        try {
+            md5 = MD5(pzza);
+        } catch (Exception ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(pzza + " " + md5 + " " + Userz[1]);
+        if (TxtUser.getText().equals(Userz[0]) && md5.equals(Userz[1])){
             JOptionPane.showMessageDialog(null, "Inicio de Sesión Correcto", "Buen Día", JOptionPane.INFORMATION_MESSAGE);
             Mn.setVisible(true);           
             dispose();
@@ -122,9 +135,13 @@ public class Login extends javax.swing.JFrame {
         TxtUser.setText("");
         TxtPass.setText("");
     }
-
+     
     }//GEN-LAST:event_BtnLogActionPerformed
-
+    private static String MD5(String Pazz) throws Exception {
+      MessageDigest m = MessageDigest.getInstance("MD5");
+      m.update(Pazz.getBytes(),0,Pazz.length());     
+      return new BigInteger(1,m.digest()).toString(16); 
+   }  
     /**
      * @param args the command line arguments
      */
