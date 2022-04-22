@@ -21,14 +21,14 @@ public class Consultas {
     private Connection connection = null;
    
     
-    
+
     
     public ArrayList<String> obtenerSKN() {
         ArrayList<String> columns = new ArrayList<>();
         try {
             connection = conexion.Conexion();
             s = connection.createStatement();
-             rs = s.executeQuery("select skincolor from superheroes where skincolor <>'-' group by skincolor");
+             rs = s.executeQuery("select skincolor from superheroes where skincolor <> '-' ");
             
             while(rs.next()) {
                 columns.add(rs.getString("skincolor"));
@@ -81,8 +81,6 @@ public class Consultas {
                 columnsS.add(row);
             }
         } catch (Exception e) {
-            System.out.println(e);
-            System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, "Error de conexión", "Mensaje", JOptionPane.ERROR_MESSAGE);
         }
         return columnsS;
@@ -95,7 +93,7 @@ public class Consultas {
         try {
             connection = conexion.Conexion();
             s = connection.createStatement();
-            rs = s.executeQuery("select hero_names as nombre, (select count(*) from jsonb_each_text(to_jsonb(s) - 'hero_names') as x(k,v) where x.v = 'True') as cantidad_poderes from superpowers s INNER JOIN superheroes sh ON sh.name = s.hero_names WHERE sh.publisher = '"+ casa_publicacion +"' Order by cantidad_poderes DESC limit 10");
+            rs = s.executeQuery("select hero_names as nombre, (select count(*) from jsonb_each_text(to_jsonb(s) - 'hero_names') as x(k,v) where x.v = 'True' or x.v = 'true') as cantidad_poderes from superpowers s INNER JOIN superheroes sh ON sh.name = s.hero_names WHERE sh.publisher = '"+ casa_publicacion +"' Order by cantidad_poderes DESC limit 10");
             while (rs.next()) {
                 String[] row = {rs.getString("nombre"), rs.getString("cantidad_poderes")};
                 columnsS.add(row);
@@ -200,7 +198,6 @@ public class Consultas {
      public ArrayList<String[]> loadheigen(String Gen){   
         ArrayList<String[]> heigen = new ArrayList<>();
         try{
-            System.out.println(Gen);
             connection = conexion.Conexion();
             s = connection.createStatement();             
             rs = s.executeQuery("select sh.height as altura, sh.gender as genero from superheroes sh where sh.gender = '" + Gen + "' order by sh.height");           
@@ -245,6 +242,28 @@ public class Consultas {
         return ObjUser.ALUsers;
     }
     
+    
+    public void UPDATE_HERO(String[] columnName, String[] info, String HeroName, String TableName, String condition) {
+        String consulta = "";
+        
+        for (int i = 0; i < columnName.length; i++) {
+            String columna = columnName[i];
+            String dato = info[i];
+            if(i != (columnName.length-1)) {
+            consulta = consulta + columna + "= '" + dato + "', "; 
+            } else {
+            consulta = consulta + columna + "= '" + dato + "'";
+            }
+        }
+        try {
+            connection = conexion.Conexion();
+            s = connection.createStatement();
+            s.executeUpdate("Update "+TableName+" SET "+consulta+" where "+condition+"='" +HeroName+"'");
+        } catch (Exception e) {
+            
+        }
+    }
+    
     public ArrayList<String> loadSuperPowers() {
         ArrayList<String> superpoderes = new ArrayList<>();
         try{
@@ -267,9 +286,10 @@ public class Consultas {
             s = connection.createStatement();
             rs = s.executeQuery("Select * from superpowers where hero_names = '"+ superheroe +"'");           
             while(rs.next()){
-                for (int i = 1; i < loop+1; i++) {
-                  Boolean data = Boolean.parseBoolean(rs.getString(i));
-                superheroeData.add(data);  
+                for (int i = 2; i < loop+2; i++) {
+                    String result = rs.getString(i);
+                  Boolean data = Boolean.parseBoolean(result);
+                 superheroeData.add(data);  
                 }
                 
                 
@@ -313,5 +333,6 @@ public class Consultas {
         return superheroeData;
         
     }
+    
      
 }

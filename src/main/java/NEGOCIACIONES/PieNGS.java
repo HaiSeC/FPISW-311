@@ -50,15 +50,6 @@ public class PieNGS {
         for (int j = 0; j <  dataname.size(); j++){
                 String datos = String.valueOf( dataname.get(j)) ;
                 int c = Collections.frequency( dataname, datos);
-                if (datos.equals("null") || datos.equals("-")){
-                    datos = "Desconocido";
-                } else if (datos.equals("bad")){
-                    datos = "Malvada";
-                } else if (datos.equals("good")){
-                    datos = "Buena";
-                } else if (datos.equals("neutral")){
-                    datos = "Nuetral";
-                }
                 result.setValue(datos,c);
             }
         

@@ -25,9 +25,10 @@ public class Graficos extends javax.swing.JFrame {
     }
     public Graficos(String Titulo, ArrayList<String> data) {
         initComponents();
-        CrearGraficos(Titulo, data);
         if (Titulo.equals("Porcentaje de Altura por Género")){
           CrearGraficoz(Titulo, data);  
+        } else {
+            CrearGraficos(Titulo, data);
         }
             
         
@@ -36,11 +37,6 @@ public class Graficos extends javax.swing.JFrame {
         private void CrearGraficos(String Titulo, ArrayList<String> data) { 
         try {           
             PieChart CC = new PieChart("Gráfico", Titulo, pie.createDataset(data), this);
-            /*CC.pack();      
-            CC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            CC.setVisible(true);  
-            CC.setTitle(Titulo);
-            CC.setLocationRelativeTo(null);*/
         } catch (FileNotFoundException ex) {
         Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
     }
