@@ -45,6 +45,7 @@ Consultas CT = new Consultas();
         MnHC = new javax.swing.JMenuItem();
         Mn10Height = new javax.swing.JMenuItem();
         Mn10P = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         MnBar2 = new javax.swing.JMenu();
         MnPub = new javax.swing.JMenuItem();
         MnSkinColor = new javax.swing.JMenuItem();
@@ -79,6 +80,14 @@ Consultas CT = new Consultas();
             }
         });
         Mn.add(Mn10P);
+
+        jMenuItem2.setText("CRUD");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        Mn.add(jMenuItem2);
 
         MnBar.add(Mn);
 
@@ -207,6 +216,13 @@ Consultas CT = new Consultas();
         this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+         CRUD cr = new CRUD();
+         cr.setVisible(true);
+         cr.setLocationRelativeTo(null);
+         this.dispose();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
 
     
     /**
@@ -264,5 +280,6 @@ Consultas CT = new Consultas();
     private javax.swing.JMenuItem MnPub;
     private javax.swing.JMenuItem MnSkinColor;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     // End of variables declaration//GEN-END:variables
 }

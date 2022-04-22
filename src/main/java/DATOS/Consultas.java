@@ -244,5 +244,74 @@ public class Consultas {
         }
         return ObjUser.ALUsers;
     }
+    
+    public ArrayList<String> loadSuperPowers() {
+        ArrayList<String> superpoderes = new ArrayList<>();
+        try{
+            connection = conexion.Conexion();
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT c.column_name AS superpoder FROM information_schema.columns c WHERE table_schema = 'public' AND table_name   = 'superpowers' and c.column_name <> 'hero_names'");           
+            while(rs.next()){
+                superpoderes.add(rs.getString("superpoder"));
+            }
+        }catch (Exception e){
+            System.out.println("Error en el Query SQL: " + e);
+        }
+        return superpoderes;
+    }
+    
+    public ArrayList<Boolean> getPowersInfo(String superheroe, int loop) {
+        ArrayList<Boolean> superheroeData = new ArrayList<>();
+        try{
+            connection = conexion.Conexion();
+            s = connection.createStatement();
+            rs = s.executeQuery("Select * from superpowers where hero_names = '"+ superheroe +"'");           
+            while(rs.next()){
+                for (int i = 1; i < loop+1; i++) {
+                  Boolean data = Boolean.parseBoolean(rs.getString(i));
+                superheroeData.add(data);  
+                }
+                
+                
+            }
+        }catch (Exception e){
+            System.out.println("Error en el Query SQL: " + e);
+        }
+        return superheroeData;
+        
+    }
+    
+    public ArrayList<String> getSuperHeroesName(String cond1, String cond2 ) {
+        ArrayList<String> superheroeData = new ArrayList<>();
+        try{
+            connection = conexion.Conexion();
+            s = connection.createStatement();
+            rs = s.executeQuery("Select sh.name as nombre from superheroes sh where sh.name between '"+cond1+"' and '"+cond2+"' UNION Select sh2.name as nombre from superheroes sh2 where sh2.name like '"+ cond2 + "%' Order by nombre ASC");           
+            while(rs.next()){
+                superheroeData.add(rs.getString("nombre"));
+                
+            }
+        }catch (Exception e){
+            System.out.println("Error en el Query SQL: " + e);
+        }
+        return superheroeData;
+        
+    }
+    public ArrayList<String[]> getSuperHeroesInfo(String HeroName) {
+        ArrayList<String[]> superheroeData = new ArrayList<>();
+        try{
+            connection = conexion.Conexion();
+            s = connection.createStatement();
+            rs = s.executeQuery("Select sh.name as nombre, sh.gender as genero, sh.eyecolor as ojos, sh.race as raza, sh.haircolor as cabello, sh.height as altura, sh.publisher as editorial, sh.skincolor as color_piel, sh.alignment as alineacion, sh.weight as peso, sh.image as imagen from superheroes sh where sh.name = '"+ HeroName +"'");           
+            while(rs.next()){
+                String[] data = {rs.getString("nombre"), rs.getString("genero"), rs.getString("ojos"), rs.getString("raza"), rs.getString("cabello"), rs.getString("altura"), rs.getString("editorial"), rs.getString("color_piel"), rs.getString("alineacion"), rs.getString("peso"), rs.getString("imagen")};
+                superheroeData.add(data);
+            }
+        }catch (Exception e){
+            System.out.println("Error en el Query SQL: " + e);
+        }
+        return superheroeData;
+        
+    }
      
 }
