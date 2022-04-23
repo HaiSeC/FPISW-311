@@ -10,6 +10,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import OBJETOs.ObjUser;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Arrays;
 /**
  *
  * @author Cris
@@ -333,6 +336,63 @@ public class Consultas {
         return superheroeData;
         
     }
-    
-     
+    public byte[] getImage(String HeroName) {
+        byte[] byteImg = null;
+        try{
+            connection = conexion.Conexion();
+            s = connection.createStatement();
+            rs = s.executeQuery("select image from superheroes where name = '"+ HeroName +"'");           
+            while(rs.next()){
+                byte[] data = rs.getBytes("image");
+                byteImg = data;
+            }
+        }catch (Exception e){
+            System.out.println("Error en el Query SQL: " + e);
+        }
+         System.out.println(Arrays.toString(byteImg));
+        return byteImg;
+        
+    }
+    public void addImagex(String HeroName, byte [] ImgAdd) {
+        System.out.println(HeroName);
+        System.out.println(Arrays.toString(ImgAdd));
+        try{
+            connection = conexion.Conexion();
+            s = connection.createStatement();
+            rs = s.executeQuery("update superheroes set image = " + Arrays.toString(ImgAdd) + " where name = '" + HeroName + "'");          
+        }catch (Exception e){
+            System.out.println("Error en el Query SQL: " + e);
+        }
+        
+    }
+    public void addImage(byte[] img, String HeroName) {
+
+  Connection connection = null;
+
+ try {
+   connection = conexion.Conexion();
+   Statement statement = connection.createStatement();
+
+
+   PreparedStatement ps = connection
+   .prepareStatement("update superheroes set image =? where name = ?");
+   ps.setString(2, HeroName);
+   ps.setBytes(1, img);
+   ps.executeUpdate();
+   ps.close();
+  } catch (Exception e) {
+   e.printStackTrace();
+  } finally {
+   try {
+    connection.close();
+   } catch (Exception e) {
+
+    System.out.println("Error en el Query SQL: " + e);
+
+   }
+
+  }
+
+ }
 }
+

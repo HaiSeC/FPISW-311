@@ -45,7 +45,7 @@ Consultas CT = new Consultas();
         MnHC = new javax.swing.JMenuItem();
         Mn10Height = new javax.swing.JMenuItem();
         Mn10P = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        MnCrud = new javax.swing.JMenuItem();
         MnBar2 = new javax.swing.JMenu();
         MnPub = new javax.swing.JMenuItem();
         MnSkinColor = new javax.swing.JMenuItem();
@@ -81,13 +81,13 @@ Consultas CT = new Consultas();
         });
         Mn.add(Mn10P);
 
-        jMenuItem2.setText("CRUD");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        MnCrud.setText("CRUD");
+        MnCrud.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                MnCrudActionPerformed(evt);
             }
         });
-        Mn.add(jMenuItem2);
+        Mn.add(MnCrud);
 
         MnBar.add(Mn);
 
@@ -216,12 +216,12 @@ Consultas CT = new Consultas();
         this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void MnCrudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCrudActionPerformed
          CRUD cr = new CRUD();
          cr.setVisible(true);
          cr.setLocationRelativeTo(null);
          this.dispose();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_MnCrudActionPerformed
 
 
     
@@ -275,11 +275,11 @@ Consultas CT = new Consultas();
     private javax.swing.JMenuItem MnAF;
     private javax.swing.JMenuBar MnBar;
     private javax.swing.JMenu MnBar2;
+    private javax.swing.JMenuItem MnCrud;
     private javax.swing.JMenuItem MnDG;
     private javax.swing.JMenuItem MnHC;
     private javax.swing.JMenuItem MnPub;
     private javax.swing.JMenuItem MnSkinColor;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     // End of variables declaration//GEN-END:variables
 }

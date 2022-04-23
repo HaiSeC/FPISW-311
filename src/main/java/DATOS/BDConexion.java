@@ -16,10 +16,10 @@ public class BDConexion {
     private Connection connection = null;
 
     public Connection Conexion() {
-        String url = "jdbc:postgresql://localhost:5432/SuperHeroes";
-        //String url = "jdbc:postgresql://localhost:5432/superheroesDB";
-        String password = "Postgres3620";
-        //String password = "guerrero6";
+        //String url = "jdbc:postgresql://localhost:5432/SuperHeroes";
+        String url = "jdbc:postgresql://localhost:5432/superheroesDB";
+        //String password = "Postgres3620";
+        String password = "guerrero6";
         try {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(url, "postgres", password);
