@@ -570,14 +570,19 @@ public class CRUD extends javax.swing.JFrame {
             CT.UPDATE_HERO(info1, info2, sh, "superheroes", "name");
             String[] data = getDataTable(superpowers.size());
             CT.UPDATE_HERO(superpowers.toArray(new String[0]), data, sh, "superpowers", "hero_names");
-            InsImg();
+            
             JOptionPane.showMessageDialog(null, "Se ha actualizado la informacion con exito!","Actualizado!", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             System.out.println(e);
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, "No se ha podido actualizar","Error de conexion", JOptionPane.ERROR_MESSAGE);
         }
-
+        
+        try {
+            InsImg();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BtnUpdateActionPerformed
 
     private void RbPZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RbPZActionPerformed
