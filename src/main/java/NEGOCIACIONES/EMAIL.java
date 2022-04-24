@@ -49,7 +49,7 @@ public class EMAIL {
             message.setRecipients(
                     Message.RecipientType.TO,
                     /*InternetAddress.parse("aalfaroq@utn.ac.cr")*/
-                    InternetAddress.parse("crissanabriah3@gmail.com")
+                    InternetAddress.parse("jimmyugaldeutn@gmail.com")
             );
             message.setSubject("Mensaje ultra secreto");
             message.setText("Abre el link del QR para revelar los secretos del universo");
