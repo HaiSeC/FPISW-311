@@ -38,14 +38,14 @@ public class Graficos extends javax.swing.JFrame {
         try {           
             PieChart CC = new PieChart("Gráfico", Titulo, pie.createDataset(data), this);
         } catch (FileNotFoundException ex) {
-        Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
     }
     }
         private void CrearGraficoz(String Titulo, ArrayList<String> data) { 
         try {           
             PieChart CC = new PieChart("Gráfico", Titulo, pie.createDatasetAG(data), this);
         } catch (FileNotFoundException ex) {
-        Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
     }
     }
 
@@ -93,7 +93,7 @@ public class Graficos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        Menu main = new Menu();
+        CRUD main = new CRUD();
         main.setVisible(true);      
         main.setLocationRelativeTo(null);
         this.dispose();       

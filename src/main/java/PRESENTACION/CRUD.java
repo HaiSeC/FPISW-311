@@ -9,6 +9,7 @@ import NEGOCIACIONES.EMAIL;
 import NEGOCIACIONES.QR;
 import com.google.zxing.NotFoundException;
 import com.google.zxing.WriterException;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;
@@ -19,10 +20,13 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.io.ByteArrayOutputStream;
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.Arrays;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -33,7 +37,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Cris
  */
 public class CRUD extends javax.swing.JFrame {
-    JFileChooser file = new JFileChooser();
+    JFileChooser file = null;
     Image newImg;
     Consultas CT = new Consultas();
     ArrayList<String> superpowers = new  ArrayList<>();
@@ -42,6 +46,8 @@ public class CRUD extends javax.swing.JFrame {
     ArrayList<String> SPHRS;
     BufferedImage imagen;
     String sh = "";
+    Image imgx;
+    File imageDAta = null;
     /**
      * Creates new form CRUD
      */
@@ -55,14 +61,20 @@ public class CRUD extends javax.swing.JFrame {
         String cond1 = null, cond2 = null;
         if (RbAH.isSelected()) {
             cond1 = "A";
-            cond2 = "H";
+            cond2 = "E";
         } else if (RbIO.isSelected()) {
-            cond1 = "I";
-            cond2 = "O";
+            cond1 = "F";
+            cond2 = "K";
         } else if (RbPZ.isSelected()) {
-            cond1 = "P";
+            cond1 = "L";
+            cond2 = "P";
+        } else if (RbOV.isSelected()) {
+            cond1 = "Q";
+            cond2 = "V";
+        }  else if (RbWZ.isSelected()) {
+            cond1 = "W";
             cond2 = "Z";
-        }
+        } 
         SPHRS = new ArrayList();
         SPHRS = CT.getSuperHeroesName(cond1, cond2);
         for (int i = 0; i < SPHRS.size(); i++) {
@@ -119,8 +131,18 @@ public class CRUD extends javax.swing.JFrame {
         RbIO = new javax.swing.JRadioButton();
         RbPZ = new javax.swing.JRadioButton();
         BtnUpdate = new javax.swing.JButton();
+        RbOV = new javax.swing.JRadioButton();
+        RbWZ = new javax.swing.JRadioButton();
         MnBar = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        Mn = new javax.swing.JMenu();
+        MnHC = new javax.swing.JMenuItem();
+        Mn10Height = new javax.swing.JMenuItem();
+        Mn10P = new javax.swing.JMenuItem();
+        MnBar2 = new javax.swing.JMenu();
+        MnPub = new javax.swing.JMenuItem();
+        MnSkinColor = new javax.swing.JMenuItem();
+        MnDG = new javax.swing.JMenuItem();
+        MnAF = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -219,7 +241,7 @@ public class CRUD extends javax.swing.JFrame {
 
         buttonGroup1.add(RbAH);
         RbAH.setSelected(true);
-        RbAH.setText("A-H");
+        RbAH.setText("A-E");
         RbAH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RbAHActionPerformed(evt);
@@ -227,7 +249,7 @@ public class CRUD extends javax.swing.JFrame {
         });
 
         buttonGroup1.add(RbIO);
-        RbIO.setText("I-O");
+        RbIO.setText("F-K");
         RbIO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RbIOActionPerformed(evt);
@@ -235,7 +257,7 @@ public class CRUD extends javax.swing.JFrame {
         });
 
         buttonGroup1.add(RbPZ);
-        RbPZ.setText("P-Z");
+        RbPZ.setText("L-P");
         RbPZ.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RbPZActionPerformed(evt);
@@ -249,17 +271,93 @@ public class CRUD extends javax.swing.JFrame {
             }
         });
 
-        jMenu1.setText("Menu");
+        buttonGroup1.add(RbOV);
+        RbOV.setText("Q-V");
+        RbOV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RbOVActionPerformed(evt);
+            }
+        });
 
-        jMenuItem1.setText("Volver");
+        buttonGroup1.add(RbWZ);
+        RbWZ.setText("W-Z");
+        RbWZ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RbWZActionPerformed(evt);
+            }
+        });
+
+        Mn.setText("Inicio");
+
+        MnHC.setText("Heroes Calvos");
+        MnHC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnHCActionPerformed(evt);
+            }
+        });
+        Mn.add(MnHC);
+
+        Mn10Height.setText("Top 10 Altura");
+        Mn10Height.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mn10HeightActionPerformed(evt);
+            }
+        });
+        Mn.add(Mn10Height);
+
+        Mn10P.setText("Top 10 Poderes");
+        Mn10P.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mn10PActionPerformed(evt);
+            }
+        });
+        Mn.add(Mn10P);
+
+        MnBar.add(Mn);
+
+        MnBar2.setText("Estadisticas");
+
+        MnPub.setText("Editoriales");
+        MnPub.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnPubActionPerformed(evt);
+            }
+        });
+        MnBar2.add(MnPub);
+
+        MnSkinColor.setText("Color de Piel");
+        MnSkinColor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnSkinColorActionPerformed(evt);
+            }
+        });
+        MnBar2.add(MnSkinColor);
+
+        MnDG.setText("Distribucion por Genero");
+        MnDG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnDGActionPerformed(evt);
+            }
+        });
+        MnBar2.add(MnDG);
+
+        MnAF.setText("Alineacion Femenina");
+        MnAF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnAFActionPerformed(evt);
+            }
+        });
+        MnBar2.add(MnAF);
+
+        jMenuItem1.setText("Genero por Altura");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        MnBar2.add(jMenuItem1);
 
-        MnBar.add(jMenu1);
+        MnBar.add(MnBar2);
 
         setJMenuBar(MnBar);
 
@@ -319,10 +417,16 @@ public class CRUD extends javax.swing.JFrame {
                         .addComponent(CboXSel, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(RbAH)
-                            .addComponent(RbIO)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(RbAH)
+                                .addGap(18, 18, 18)
+                                .addComponent(RbOV))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(RbIO)
+                                .addGap(18, 18, 18)
+                                .addComponent(RbWZ))
                             .addComponent(RbPZ))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(LblSuper, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -348,9 +452,13 @@ public class CRUD extends javax.swing.JFrame {
                         .addComponent(CboXSel, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(LblSuper, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(RbAH)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(RbAH)
+                            .addComponent(RbOV))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(RbIO)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(RbIO)
+                            .addComponent(RbWZ))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(RbPZ)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -429,52 +537,52 @@ public class CRUD extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        Menu main = new Menu();
-        main.setVisible(true);
-        main.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void BtnChgImgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnChgImgActionPerformed
+        file = new JFileChooser();
+        file.setCurrentDirectory(new File(System.getProperty("user.home")));
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("*.Images", "jpg", "png");
+        file.setFileFilter(filter);
+        int result = file.showSaveDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION){
+            try {
+                ImageToByte(file.getSelectedFile());
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                loadImg(ImageToByte(file.getSelectedFile()));
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else if(result == JFileChooser.CANCEL_OPTION){
+            System.out.println("No File selected");
+            file = null;
+        }
+    }//GEN-LAST:event_BtnChgImgActionPerformed
+
+    private void BtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdateActionPerformed
+        String[] info1 = {"name","gender","eyecolor","race","haircolor","height","publisher","skincolor","alignment", "weight"};
+        String[] info2 = {TxtName.getText(),TxtGeb.getText(),TxtEye.getText(),TxtRace.getText(),TxtCHar.getText(),TxtHei.getText(),TxtPub.getText(),TxtSCol.getText(),TxtAl.getText(),TxtWe.getText()};
+        try {
+            CT.UPDATE_HERO(info1, info2, sh, "superheroes", "name");
+            String[] data = getDataTable(superpowers.size());
+            CT.UPDATE_HERO(superpowers.toArray(new String[0]), data, sh, "superpowers", "hero_names");
+            InsImg();
+            JOptionPane.showMessageDialog(null, "Se ha actualizado la informacion con exito!","Actualizado!", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, "No se ha podido actualizar","Error de conexion", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_BtnUpdateActionPerformed
 
     private void RbPZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RbPZActionPerformed
-       load();
+        load();
     }//GEN-LAST:event_RbPZActionPerformed
-
-    private void CboXSelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CboXSelActionPerformed
-        try {
-        sh = CboXSel.getSelectedItem().toString();
-        System.out.println(sh);
-        info = CT.getSuperHeroesInfo(sh);
-        TxtName.setText(info.get(0)[0]);///
-        TxtGeb.setText(info.get(0)[1]);///
-        TxtEye.setText(info.get(0)[2]);///
-        TxtRace.setText(info.get(0)[3]);///
-        TxtCHar.setText(info.get(0)[4]);
-        TxtHei.setText(info.get(0)[5]);//
-        TxtPub.setText(info.get(0)[6]);///
-        TxtSCol.setText(info.get(0)[7]);
-        TxtAl.setText(info.get(0)[8]);//
-        TxtWe.setText(info.get(0)[9]);//        
-        
-        superpowers = CT.loadSuperPowers();
-        values = CT.getPowersInfo(sh, superpowers.size());
-        
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Superpoderess", superpowers.toArray(new String[0]));
-        model.addColumn("Posee", values.toArray(new Boolean[0]));
-        
-        jTable1.setModel(model);
-        jTable1.getColumnModel().getColumn(1).setCellEditor(jTable1.getDefaultEditor(Boolean.class));
-        jTable1.getColumnModel().getColumn(1).setCellRenderer(jTable1.getDefaultRenderer(Boolean.class));
-        loadImg(CT.getImage(sh));
-        } catch (Exception e) {
-        }
-        if (CT.getImage(sh) == null){
-            lblImg.setIcon(null);
-            lblImg.revalidate();
-        }
-        
-    }//GEN-LAST:event_CboXSelActionPerformed
 
     private void RbIOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RbIOActionPerformed
         load();
@@ -484,6 +592,46 @@ public class CRUD extends javax.swing.JFrame {
         load();
     }//GEN-LAST:event_RbAHActionPerformed
 
+    private void CboXSelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CboXSelActionPerformed
+        imageDAta = null;
+        jTable1.removeAll();
+        try {
+            sh = CboXSel.getSelectedItem().toString();
+            System.out.println(sh);
+            info = CT.getSuperHeroesInfo(sh);
+            TxtName.setText(info.get(0)[0]);///
+            TxtGeb.setText(info.get(0)[1]);///
+            TxtEye.setText(info.get(0)[2]);///
+            TxtRace.setText(info.get(0)[3]);///
+            TxtCHar.setText(info.get(0)[4]);
+            TxtHei.setText(info.get(0)[5]);//
+            TxtPub.setText(info.get(0)[6]);///
+            TxtSCol.setText(info.get(0)[7]);
+            TxtAl.setText(info.get(0)[8]);//
+            TxtWe.setText(info.get(0)[9]);//
+
+            superpowers = CT.loadSuperPowers();
+            values = CT.getPowersInfo(sh, superpowers.size());
+
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("Superpoderess", superpowers.toArray(new String[0]));
+            model.addColumn("Posee", values.toArray(new Boolean[0]));
+
+            jTable1.setModel(model);
+            jTable1.getColumnModel().getColumn(1).setCellEditor(jTable1.getDefaultEditor(Boolean.class));
+            jTable1.getColumnModel().getColumn(1).setCellRenderer(jTable1.getDefaultRenderer(Boolean.class));
+            loadImg(CT.getImage(sh));
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println(e.getMessage());
+        }
+        if (CT.getImage(sh) == null){
+            lblImg.setIcon(null);
+            lblImg.revalidate();
+        }
+
+    }//GEN-LAST:event_CboXSelActionPerformed
+
     private void BtnEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEmailActionPerformed
         String listaPD = "";
         for (int i = 0; i < values.size(); i++) {
@@ -491,7 +639,7 @@ public class CRUD extends javax.swing.JFrame {
             if (get == true) {
                 listaPD =  listaPD + " -"+superpowers.get(i) + "\n";
             }
-            
+
         }
         String psInfo = "Informacion: \nNombre: " + info.get(0)[0] + "\n" +
         "Genero: " + info.get(0)[1] + "\n" +
@@ -516,57 +664,102 @@ public class CRUD extends javax.swing.JFrame {
             Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            msm.EnviarCorreo(qr);
+            if(imageDAta != null){
+                 msm.EnviarCorreo(qr, imageDAta);
+            } else {
+                msm.EnviarCorreo(qr); 
+            }
+           
         } catch (IOException ex) {
             Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
         }
+        imageDAta = null;
     }//GEN-LAST:event_BtnEmailActionPerformed
 
-    private void BtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdateActionPerformed
-        String[] info1 = {"name","gender","eyecolor","race","haircolor","height","publisher","skincolor","alignment", "weight"};
-        String[] info2 = {TxtName.getText(),TxtGeb.getText(),TxtEye.getText(),TxtRace.getText(),TxtCHar.getText(),TxtHei.getText(),TxtPub.getText(),TxtSCol.getText(),TxtAl.getText(),TxtWe.getText()};
-        try {
-            CT.UPDATE_HERO(info1, info2, sh, "superheroes", "name");
-            String[] data = getDataTable(SPHRS.size());
-            CT.UPDATE_HERO(superpowers.toArray(new String[0]), data, sh, "superpowers", "hero_names");
-            InsImg();
-            JOptionPane.showMessageDialog(null, "Se ha actualizado la informacion con exito!","Actualizado!", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "No se ha podido actualizar","Error de conexion", JOptionPane.ERROR_MESSAGE);
-        }
-        
-    }//GEN-LAST:event_BtnUpdateActionPerformed
+    private void MnHCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnHCActionPerformed
+        GraficosListas GFL = new GraficosListas("Super Heroes Calvos", CT.obtenerLHNH(), CT.obtenerSHWNH());
+        GFL.setVisible(true);
+        GFL.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_MnHCActionPerformed
+
+    private void Mn10HeightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mn10HeightActionPerformed
+        String[] Columnas = {"Nombre", "Genero", "Color de Ojos", "Raza", "Color de Cabello", "Altura", "Editorial"};
+        Tabla TB = new Tabla(CT.obtenerHSH(), Columnas);
+        TB.setVisible(true);
+        TB.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_Mn10HeightActionPerformed
+
+    private void Mn10PActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mn10PActionPerformed
+        GraficosRBTNListas GRBL = new GraficosRBTNListas(CT.loadPublisher2(), "Top 10 Super Heroes con mas Super Poderes");
+        GRBL.setLocationRelativeTo(null);
+        GRBL.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_Mn10PActionPerformed
+
+    private void MnPubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPubActionPerformed
+
+        Graficos GF = new Graficos("Porcentaje de Publishers",   CT.loadPublisher());
+        GF.setVisible(true);
+        GF.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_MnPubActionPerformed
+
+    private void MnSkinColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSkinColorActionPerformed
+        Graficos GF = new Graficos("Porcentaje de Heroes por Color",  CT.obtenerSKN());
+        GF.setVisible(true);
+        GF.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_MnSkinColorActionPerformed
+
+    private void MnDGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDGActionPerformed
+        Graficos DG = new Graficos("Porcentaje de Generos",   CT.loadGender());
+        DG.setVisible(true);
+        DG.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_MnDGActionPerformed
+
+    private void MnAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnAFActionPerformed
+        Graficos AF = new Graficos("Porcentaje de Alineación Femenina",   CT.loadposfem());
+        AF.setVisible(true);
+        AF.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_MnAFActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        //        String[] Columnas = {"Altura", "Genero"};
+        ArrayList<String> AL = new ArrayList<>();
+        AL.add("Male");
+        AL.add("Female");
+        AL.add("-");
+        GraficosRBTNListas HG = new GraficosRBTNListas(AL, "Altura Genero");
+        //Graficos HG = new Graficos("Porcentaje de Altura por Género", CT.loadheigen());
+        HG.setVisible(true);
+        HG.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void RbOVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RbOVActionPerformed
+        load();
+    }//GEN-LAST:event_RbOVActionPerformed
+
+    private void RbWZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RbWZActionPerformed
+       load();
+    }//GEN-LAST:event_RbWZActionPerformed
     private void InsImg() throws FileNotFoundException{
         CT.addImage(ImageToByte(file.getSelectedFile()), sh);
-    }
-    private void BtnChgImgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnChgImgActionPerformed
-        
-        file.setCurrentDirectory(new File(System.getProperty("user.home")));
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("*.Images", "jpg", "png");
-        file.setFileFilter(filter);
-        int result = file.showSaveDialog(null);
-        if (result == JFileChooser.APPROVE_OPTION){  
-            try {
-                ImageToByte(file.getSelectedFile());               
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                loadImg(ImageToByte(file.getSelectedFile()));
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        else if(result == JFileChooser.CANCEL_OPTION){
-            System.out.println("No File selected");
-        }
-    }//GEN-LAST:event_BtnChgImgActionPerformed
-        public ImageIcon ResizeImage(Image Imagez){
+    }        
+    public Image ResizeImage(Image Imagez){
             Image img = Imagez;
             Image newImg = img.getScaledInstance(lblImg.getWidth(), lblImg.getHeight(), Image.SCALE_SMOOTH);
-            ImageIcon image = new ImageIcon(newImg);
-            return image;
+            return newImg;
         }
+    
+    public ImageIcon IconImage(Image newImg) {
+        ImageIcon image = new ImageIcon(newImg);
+            return image;
+    }
         private byte [] ImageToByte(File file) throws FileNotFoundException{
         FileInputStream fis = new FileInputStream(file);
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -580,21 +773,26 @@ public class CRUD extends javax.swing.JFrame {
         byte[] bytez = bos.toByteArray(); 
      return bytez;
     } 
-        public void loadImg(byte[] image){
-        Image imgx = Toolkit.getDefaultToolkit().createImage(image);
-
-        lblImg.setIcon(ResizeImage(imgx));
+        public void loadImg(byte[] image) throws IOException{
+        imgx = Toolkit.getDefaultToolkit().createImage(image);
+        lblImg.setIcon(IconImage(ResizeImage(imgx))); 
+        imageDAta = new File("Hero.png");
+        try (OutputStream stream = new FileOutputStream("Hero.png")) {
+            stream.write(image);
+        }
         }
     private String[] getDataTable(int size){
         String[] poderes = new String[size];
-        
-        for(int i = 0; i < jTable1.getRowCount(); i++) {
+        System.out.println(jTable1.getRowCount());
+        for(int i = 0; i < (jTable1.getRowCount()); i++) {
             poderes[i] = Boolean.toString((boolean) jTable1.getValueAt(i, 1));
         }
         
         return poderes;
         
-    } 
+    }
+    
+
     /**
      * @param args the command line arguments
      */
@@ -647,11 +845,22 @@ public class CRUD extends javax.swing.JFrame {
     private javax.swing.JLabel LblSCol;
     private javax.swing.JLabel LblSuper;
     private javax.swing.JLabel LblWe;
+    private javax.swing.JMenu Mn;
+    private javax.swing.JMenuItem Mn10Height;
+    private javax.swing.JMenuItem Mn10P;
+    private javax.swing.JMenuItem MnAF;
     private javax.swing.JMenuBar MnBar;
+    private javax.swing.JMenu MnBar2;
+    private javax.swing.JMenuItem MnDG;
+    private javax.swing.JMenuItem MnHC;
+    private javax.swing.JMenuItem MnPub;
+    private javax.swing.JMenuItem MnSkinColor;
     private javax.swing.JPanel PlnImg;
     private javax.swing.JRadioButton RbAH;
     private javax.swing.JRadioButton RbIO;
+    private javax.swing.JRadioButton RbOV;
     private javax.swing.JRadioButton RbPZ;
+    private javax.swing.JRadioButton RbWZ;
     private javax.swing.JTextField TxtAl;
     private javax.swing.JTextField TxtCHar;
     private javax.swing.JTextField TxtEye;
@@ -663,7 +872,6 @@ public class CRUD extends javax.swing.JFrame {
     private javax.swing.JTextField TxtSCol;
     private javax.swing.JTextField TxtWe;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

@@ -183,7 +183,7 @@ Consultas CT = new Consultas();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        Menu main = new Menu();
+        CRUD main = new CRUD();
         main.setVisible(true);        
         main.setLocationRelativeTo(null);
         this.dispose();      
@@ -252,14 +252,14 @@ Consultas CT = new Consultas();
         try {           
             PieChart CC = new PieChart("Gráfico", Titulo, pie.createDataset3(data), PlnPie);
         } catch (FileNotFoundException ex) {
-        Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
     }
     }
      private void CrearGraficoX(String Titulo, ArrayList<String[]> data) { 
         try {           
             PieChart CC = new PieChart("Gráfico", Titulo, pie.createDatasetX(data), PlnPie);
         } catch (FileNotFoundException ex) {
-        Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
     }
     }
     private String getPublisher() {

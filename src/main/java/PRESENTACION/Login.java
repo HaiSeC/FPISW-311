@@ -19,7 +19,7 @@ import javax.swing.UIManager;
  */
 public class Login extends javax.swing.JFrame {
     User US = new User();
-    Menu Mn = new Menu();
+    CRUD Mn = new CRUD();
     Object[] Userz = new Object[2];
     String pzza;
     /**

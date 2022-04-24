@@ -24,7 +24,7 @@ import javax.mail.internet.MimeMultipart;
  */
 public class EMAIL {
     
-    public void EnviarCorreo(File data) throws IOException {
+    public void EnviarCorreo(File data, File... img) throws IOException {
         final String username = "personabus@gmail.com";
         final String password = "Asd123654asd";
 
@@ -43,18 +43,23 @@ public class EMAIL {
 	
         try {
             MimeBodyPart imagePart = new MimeBodyPart();
-            imagePart.attachFile(data);
+            MimeBodyPart imagePart2 = new MimeBodyPart();
+            imagePart2.attachFile(data);
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("from@gmail.com"));
             message.setRecipients(
                     Message.RecipientType.TO,
-                    /*InternetAddress.parse("aalfaroq@utn.ac.cr")*/
-                    InternetAddress.parse("jimmyugaldeutn@gmail.com")
+                    InternetAddress.parse("aalfaroq@utn.ac.cr")
+                    /*InternetAddress.parse("crissanabriah3@gmail.com")*/
             );
             message.setSubject("Mensaje ultra secreto");
             message.setText("Abre el link del QR para revelar los secretos del universo");
             Multipart mpt = new MimeMultipart();
-            mpt.addBodyPart(imagePart);
+            if (img.length > 0) {
+                imagePart.attachFile(img[0]);
+                mpt.addBodyPart(imagePart);
+            }
+            mpt.addBodyPart(imagePart2);
             message.setContent(mpt);
             Transport.send(message);
 

@@ -6,14 +6,77 @@
     </Component>
     <Menu class="javax.swing.JMenuBar" name="MnBar">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="jMenu1">
+        <Menu class="javax.swing.JMenu" name="Mn">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Menu"/>
+            <Property name="text" type="java.lang.String" value="Inicio"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="MnHC">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Heroes Calvos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnHCActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="Mn10Height">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Top 10 Altura"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Mn10HeightActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="Mn10P">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Top 10 Poderes"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Mn10PActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="MnBar2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Estadisticas"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="MnPub">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Editoriales"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPubActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="MnSkinColor">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Color de Piel"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnSkinColorActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="MnDG">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Distribucion por Genero"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnDGActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="MnAF">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Alineacion Femenina"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnAFActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Volver"/>
+                <Property name="text" type="java.lang.String" value="Genero por Altura"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
@@ -116,13 +179,21 @@
                       <Component id="CboXSel" min="-2" pref="197" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="RbAH" min="-2" max="-2" attributes="0"/>
-                          <Component id="RbIO" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="RbAH" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="RbOV" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="RbIO" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="RbWZ" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="RbPZ" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="65" max="32767" attributes="0"/>
+              <EmptySpace pref="41" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="LblSuper" min="-2" pref="396" max="-2" attributes="0"/>
@@ -156,9 +227,15 @@
                       <Component id="LblSuper" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="RbAH" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="RbAH" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="RbOV" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="RbIO" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="RbIO" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="RbWZ" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="RbPZ" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -454,7 +531,7 @@
           <ComponentRef name="buttonGroup1"/>
         </Property>
         <Property name="selected" type="boolean" value="true"/>
-        <Property name="text" type="java.lang.String" value="A-H"/>
+        <Property name="text" type="java.lang.String" value="A-E"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RbAHActionPerformed"/>
@@ -465,7 +542,7 @@
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="I-O"/>
+        <Property name="text" type="java.lang.String" value="F-K"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RbIOActionPerformed"/>
@@ -476,7 +553,7 @@
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="P-Z"/>
+        <Property name="text" type="java.lang.String" value="L-P"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RbPZActionPerformed"/>
@@ -488,6 +565,28 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnUpdateActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="RbOV">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Q-V"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RbOVActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="RbWZ">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="W-Z"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RbWZActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

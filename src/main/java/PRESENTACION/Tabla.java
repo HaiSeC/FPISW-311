@@ -108,7 +108,7 @@ public class Tabla extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        Menu main = new Menu();
+        CRUD main = new CRUD();
         main.setVisible(true);        // TODO add your handling code here:
         main.setLocationRelativeTo(null);
         this.dispose();        // TODO add your handling code here:
